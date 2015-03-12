@@ -1,0 +1,37 @@
+---
+- hosts: all
+
+  roles:
+
+    - environment-core
+    - environment-apache
+    - environment-postgresql
+    - environment-mongodb
+    - environment-clojure
+    - environment-selenium
+
+  tasks:
+
+    - name: Create database user                                 
+      postgresql_user: name={{ item }} password={{ admin_password }} role_attr_flags=CREATEDB,SUPERUSER
+      with_items:  
+        - run
+        - admin 
+      sudo: yes
+      sudo_user: postgres
+      tags:
+      - writing-hub
+      - postgresql
+      - run
+
+    - name: Setup production databases
+      postgresql_db: name={{ item }} owner=run
+      with_items:
+        - writing-hub
+      sudo: yes
+      sudo_user: postgres
+      tags:
+      - writing-hub
+      - postgresql
+      - run
+
