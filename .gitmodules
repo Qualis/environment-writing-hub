@@ -1,18 +1,18 @@
 [submodule "environment-clojure"]
 	path = environment-clojure
-	url = https://github.com/Qualis/environment-clojure
+	url = https://github.com/svo/environment-clojure
 [submodule "environment-core"]
 	path = environment-core
-	url = https://github.com/Qualis/environment-core
+	url = https://github.com/svo/environment-core
 [submodule "environment-apache"]
 	path = environment-apache
-	url = https://github.com/Qualis/environment-apache
+	url = https://github.com/svo/environment-apache
 [submodule "environment-postgresql"]
 	path = environment-postgresql
-	url = https://github.com/Qualis/environment-postgresql
+	url = https://github.com/svo/environment-postgresql
 [submodule "environment-mongodb"]
 	path = environment-mongodb
-	url = https://github.com/Qualis/environment-mongodb
+	url = https://github.com/svo/environment-mongodb
 [submodule "environment-selenium"]
 	path = environment-selenium
-	url = https://github.com/Qualis/environment-selenium
+	url = https://github.com/svo/environment-selenium
