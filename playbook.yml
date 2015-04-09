@@ -35,3 +35,34 @@
       - postgresql
       - run
 
+    - name: Install npm
+      apt: pkg={{ item }}
+      with_items:
+      - npm
+      - nodejs-legacy
+      sudo: yes
+
+    - name: Install bower and react tools
+      npm: name={{ item }} global=yes
+      with_items:
+      - bower
+      - react-tools
+      sudo: yes
+
+    - name: Install react/react-bootstrap
+      command: bower install {{ item }} chdir=/home/vagrant/Documents/workspace/writing-hub/resources/public/js
+      with_items:
+      - react
+      - react-bootstrap
+
+    - name: Copy upstart script
+      copy: src=files/jsx-watch-writing-hub.conf dest=/etc/init mode=0644
+      notify:
+      - Start watching for jsx changes
+      sudo: yes
+
+  handlers:
+
+    - name: Start watching for jsx changes
+      service: name=jsx-watch-writing-hub state=restarted
+      sudo: yes
