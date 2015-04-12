@@ -35,22 +35,28 @@
       - postgresql
       - run
 
+    - name: Add node PPA
+      apt_repository: repo='ppa:chris-lea/node.js' update_cache=yes
+      sudo: yes
+
     - name: Install npm
       apt: pkg={{ item }}
       with_items:
-      - npm
-      - nodejs-legacy
+      - nodejs
+      - make
+      - build-essential
+      - g++
       sudo: yes
 
-    - name: Install bower and react tools
+    - name: Install react tools
       npm: name={{ item }} global=yes
       with_items:
-      - bower
       - react-tools
+      - jest-cli
       sudo: yes
 
     - name: Install react/react-bootstrap
-      command: bower install {{ item }} chdir=/home/vagrant/Documents/workspace/writing-hub/resources/public/js
+      npm: name={{ item }} path=/home/vagrant/Documents/workspace/writing-hub/resources/public/js
       with_items:
       - react
       - react-bootstrap
