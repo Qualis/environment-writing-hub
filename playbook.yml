@@ -53,22 +53,21 @@
       with_items:
       - react-tools
       - jest-cli
+      - gulp
+      - vinyl-source-stream
+      - browserify
+      - reactify
+      - glob
       sudo: yes
 
-    - name: Install react/react-bootstrap
-      npm: name={{ item }} path=/home/vagrant/Documents/workspace/writing-hub/resources/public/js
-      with_items:
-      - react
-      - react-bootstrap
-
     - name: Copy upstart script
-      copy: src=files/jsx-watch-writing-hub.conf dest=/etc/init mode=0644
+      copy: src=files/writing-hub-build.conf dest=/etc/init mode=0644
       notify:
-      - Start watching for jsx changes
+      - Starts the gulp process to watch/build the writing-hub project
       sudo: yes
 
   handlers:
 
-    - name: Start watching for jsx changes
-      service: name=jsx-watch-writing-hub state=restarted
+    - name: Starts the gulp process to watch/build the writing-hub project
+      service: name=writing-hub-build state=restarted
       sudo: yes
