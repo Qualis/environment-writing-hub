@@ -61,7 +61,7 @@
       sudo: yes
 
     - name: Copy upstart script
-      copy: src=files/writing-hub-build.conf dest=/etc/init mode=0644
+      copy: src=files/browser-client-build.conf dest=/etc/init mode=0644
       notify:
       - Starts the gulp process to watch/build the writing-hub project
       sudo: yes
@@ -69,5 +69,5 @@
   handlers:
 
     - name: Starts the gulp process to watch/build the writing-hub project
-      service: name=writing-hub-build state=restarted
+      service: name=browser-client-build state=restarted
       sudo: yes
