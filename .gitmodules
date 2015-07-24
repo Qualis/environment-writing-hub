@@ -7,9 +7,6 @@
 [submodule "environment-apache"]
 	path = environment-apache
 	url = https://github.com/svo/environment-apache
-[submodule "environment-postgresql"]
-	path = environment-postgresql
-	url = https://github.com/svo/environment-postgresql
 [submodule "environment-mongodb"]
 	path = environment-mongodb
 	url = https://github.com/svo/environment-mongodb

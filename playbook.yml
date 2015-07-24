@@ -5,38 +5,21 @@
 
     - environment-core
     - environment-apache
-    - environment-postgresql
     - environment-mongodb
     - environment-clojure
     - environment-selenium
 
   tasks:
 
-    - name: Create database user                                 
-      postgresql_user: name={{ item }} password={{ admin_password }} role_attr_flags=CREATEDB,SUPERUSER
-      with_items:  
-        - run
-        - admin 
+    - name: Add redis PPA
+      apt_repository: repo={{ item }}
       sudo: yes
-      sudo_user: postgres
-      tags:
-      - writing-hub
-      - postgresql
-      - run
-
-    - name: Setup production databases
-      postgresql_db: name={{ item }} owner=run
       with_items:
-        - writing-hub
-      sudo: yes
-      sudo_user: postgres
-      tags:
-      - writing-hub
-      - postgresql
-      - run
+      - ppa:chris-lea/redis-server
+      - ppa:chris-lea/node.js
 
-    - name: Add node PPA
-      apt_repository: repo='ppa:chris-lea/node.js' update_cache=yes
+    - name: Install redis 
+      apt: pkg=redis-server update_cache=yes
       sudo: yes
 
     - name: Install npm
