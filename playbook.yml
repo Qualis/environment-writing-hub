@@ -11,7 +11,7 @@
 
   tasks:
 
-    - name: Add redis PPA
+    - name: Add PPA
       apt_repository: repo={{ item }}
       sudo: yes
       with_items:
@@ -31,16 +31,8 @@
       - g++
       sudo: yes
 
-    - name: Install react tools
-      npm: name={{ item }} global=yes
-      with_items:
-      - react-tools
-      - jest-cli
-      - gulp
-      - vinyl-source-stream
-      - browserify
-      - reactify
-      - glob
+    - name: Install gulp 
+      npm: name=gulp global=yes
       sudo: yes
 
     - name: Copy upstart script
