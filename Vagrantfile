@@ -22,7 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.cache.scope = :machine
   end
 
-  config.vm.synced_folder "~/Documents", "/home/vagrant/Documents"
+  config.vm.synced_folder "~/Documents", "/home/vagrant/Documents", :nfs => true
 
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", "3072"]
