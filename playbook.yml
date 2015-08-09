@@ -41,8 +41,18 @@
       - Starts the gulp process to watch/build the writing-hub project
       sudo: yes
 
+    - name: Increase allowed namespace size for mongodb
+      lineinfile: dest=/etc/mongodb.conf regexp='\# nssize \= \<size\>' line='nssize = 255'
+      notify:
+      - Restart mongodb
+      sudo: yes
+
   handlers:
 
     - name: Starts the gulp process to watch/build the writing-hub project
       service: name=browser-client-build state=restarted
+      sudo: yes
+
+    - name: Restart mongodb
+      service: name=mongodb state=restarted
       sudo: yes
