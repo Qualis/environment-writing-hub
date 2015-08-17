@@ -42,7 +42,7 @@
       sudo: yes
 
     - name: Increase allowed namespace size for mongodb
-      lineinfile: dest=/etc/mongodb.conf regexp='\# nssize \= \<size\>' line='nssize = 255'
+      lineinfile: dest=/etc/mongod.conf regexp='\# nssize \= \<size\>' line='nssize = 255'
       notify:
       - Restart mongodb
       sudo: yes
@@ -54,5 +54,5 @@
       sudo: yes
 
     - name: Restart mongodb
-      service: name=mongodb state=restarted
+      service: name=mongod state=restarted
       sudo: yes
