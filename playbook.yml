@@ -12,28 +12,31 @@
   tasks:
 
     - name: Add PPA
-      apt_repository: repo={{ item }}
+      apt_repository: repo=ppa:chris-lea/redis-server
       sudo: yes
-      with_items:
-      - ppa:chris-lea/redis-server
-      - ppa:chris-lea/node.js
 
     - name: Install redis 
       apt: pkg=redis-server update_cache=yes
       sudo: yes
 
-    - name: Install npm
-      apt: pkg={{ item }}
-      with_items:
-      - nodejs
-      - make
-      - build-essential
-      - g++
+    - name: Get io.js setup script
+      get_url: url=https://deb.nodesource.com/setup_iojs_3.x dest=~/iojs-installer
       sudo: yes
 
-    - name: Install gulp 
-      npm: name=gulp global=yes
+    - name: Setup io.js
+      command: /bin/bash ~/iojs-installer
       sudo: yes
+
+    - name: Install io.js
+      apt: pkg=iojs
+      sudo: yes
+
+    - name: Install gulp/react-tools
+      npm: name={{ item.name }} version={{ item.version }} global=yes
+      sudo: yes
+      with_items:
+      - {name: gulp, version: 3.9.0}
+      - {name: react-tools, version: 0.13.3}
 
     - name: Copy upstart script
       copy: src=files/browser-client-build.conf dest=/etc/init mode=0644
