@@ -1,0 +1,8 @@
+
+    - name: Starts the gulp process to watch/build the writing-hub project
+      service: name=browser-client-build state=restarted
+      sudo: yes
+
+    - name: Restart mongodb
+      service: name=mongod state=restarted
+      sudo: yes

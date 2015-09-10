@@ -1,0 +1,61 @@
+
+    - name: Add PPA
+      apt_repository: repo=ppa:chris-lea/redis-server
+      sudo: yes
+      tags:
+      - writing-hub
+
+    - name: Install redis 
+      apt: pkg=redis-server update_cache=yes
+      sudo: yes
+      tags:
+      - writing-hub
+
+    - name: Get io.js setup script
+      get_url: url=https://deb.nodesource.com/setup_iojs_3.x dest=~/iojs-installer
+      sudo: yes
+      tags:
+      - writing-hub
+      - development
+
+    - name: Setup io.js
+      command: /bin/bash ~/iojs-installer
+      sudo: yes
+      tags:
+      - writing-hub
+      - development
+
+    - name: Install io.js
+      apt: pkg=iojs
+      sudo: yes
+      tags:
+      - writing-hub
+      - development
+
+    - name: Install gulp/react-tools
+      npm: name={{ item.name }} version={{ item.version }} global=yes
+      sudo: yes
+      with_items:
+      - {name: gulp, version: 3.9.0}
+      - {name: react-tools, version: 0.13.3}
+      tags:
+      - writing-hub
+      - development
+
+    - name: Copy upstart script
+      copy: src=files/browser-client-build.conf dest=/etc/init mode=0644
+      notify:
+      - Starts the gulp process to watch/build the writing-hub project
+      sudo: yes
+      tags:
+      - writing-hub
+      - development
+      - vagrant
+
+    - name: Increase allowed namespace size for mongodb
+      lineinfile: dest=/etc/mongod.conf regexp='\# nssize \= \<size\>' line='nssize = 255'
+      notify:
+      - Restart mongodb
+      sudo: yes
+      tags:
+      - writing-hub
