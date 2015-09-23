@@ -21,6 +21,7 @@ RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
 RUN lein --version
 
 ENV DISPLAY :10
+ENV LEIN_ROOT 1
 
 ADD supervisor.conf /etc/supervisor.conf
 
