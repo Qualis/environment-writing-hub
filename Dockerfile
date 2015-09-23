@@ -18,6 +18,8 @@ RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
     cd - && \
     rm -rf environment-writing-hub
 
+RUN lein --version
+
 ENV DISPLAY :10
 
 ADD supervisor.conf /etc/supervisor.conf
