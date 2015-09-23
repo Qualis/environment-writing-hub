@@ -24,4 +24,4 @@ ENV DISPLAY :10
 
 ADD supervisor.conf /etc/supervisor.conf
 
-CMD ["supervisord", "-c", "/etc/supervisor.conf"]
+CMD ["supervisord", "-n", "-c", "/etc/supervisor.conf"]
