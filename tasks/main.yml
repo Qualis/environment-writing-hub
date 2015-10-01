@@ -1,16 +1,4 @@
 
-    - name: Add PPA
-      apt_repository: repo=ppa:chris-lea/redis-server
-      sudo: yes
-      tags:
-      - writing-hub
-
-    - name: Install redis 
-      apt: pkg=redis-server update_cache=yes
-      sudo: yes
-      tags:
-      - writing-hub
-
     - name: Get io.js setup script
       get_url: url=https://deb.nodesource.com/setup_iojs_3.x dest=~/iojs-installer
       sudo: yes
@@ -51,11 +39,3 @@
       - writing-hub
       - development
       - vagrant
-
-    - name: Increase allowed namespace size for mongodb
-      lineinfile: dest=/etc/mongod.conf regexp='\# nssize \= \<size\>' line='nssize = 255'
-      notify:
-      - Restart mongodb
-      sudo: yes
-      tags:
-      - writing-hub

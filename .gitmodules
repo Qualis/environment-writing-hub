@@ -10,3 +10,6 @@
 [submodule "environment-selenium"]
 	path = environment-selenium
 	url = https://github.com/svo/environment-selenium
+[submodule "environment-redis"]
+	path = environment-redis
+	url = https://github.com/svo/environment-redis

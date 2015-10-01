@@ -4,6 +4,7 @@
   roles:
 
     - environment-core
+    - environment-redis
     - environment-mongodb
     - environment-clojure
     - environment-selenium
