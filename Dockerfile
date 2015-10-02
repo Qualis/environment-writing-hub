@@ -1,6 +1,7 @@
 FROM shippableimages/ubuntu1404_base:latest
 MAINTAINER Sean Van Osselaer <svo@qual.is>
 
+ADD . /provisioning
 ADD dpkg_nodoc /etc/dpkg/dpkg.cfg.d/01_nodoc
 ADD dpkg_nolocales /etc/dpkg/dpkg.cfg.d/01_nolocales
 ADD apt_nocache /etc/apt/apt.conf.d/02_nocache
@@ -18,12 +19,7 @@ RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
     apt-get update && \
     apt-get install ansible -y && \
     echo "localhost ansible_connection=local" | tee /etc/ansible/hosts && \
-    apt-get install git-core -y && \
-    git clone --recursive https://github.com/Qualis/environment-writing-hub.git && \
-    cd environment-writing-hub && \
-    ansible-playbook playbook.yml --skip-tags "vagrant" && \
-    cd - && \
-    rm -rf environment-writing-hub && \
+    ansible-playbook provisioning/ci-playbook.yml --skip-tags "vagrant" && \
     apt-get autoremove -y && \
     apt-get autoclean -y && \
     apt-get clean -y && \

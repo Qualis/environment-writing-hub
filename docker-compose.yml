@@ -1,0 +1,9 @@
+redis:
+  image: svanosselaer/redis
+  ports:
+    - 6379:6379
+
+mongodb:
+  image: svanosselaer/mongodb
+  ports:
+    - 27017:27017
