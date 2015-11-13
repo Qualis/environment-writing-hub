@@ -1,31 +1,30 @@
 
-    - name: Get io.js setup script
-      get_url: url=https://deb.nodesource.com/setup_iojs_3.x dest=~/iojs-installer
+    - name: Get nodejs setup script
+      get_url: url=https://deb.nodesource.com/setup_4.x dest=~/nodejs-installer
       sudo: yes
       tags:
       - writing-hub
       - development
 
-    - name: Setup io.js
-      command: /bin/bash ~/iojs-installer
+    - name: Setup nodejs
+      command: /bin/bash ~/nodejs-installer
       sudo: yes
       tags:
       - writing-hub
       - development
 
-    - name: Install io.js
-      apt: pkg=iojs
+    - name: Install nodejs
+      apt: pkg=nodejs
       sudo: yes
       tags:
       - writing-hub
       - development
 
-    - name: Install gulp/react-tools
+    - name: Install gulp
       npm: name={{ item.name }} version={{ item.version }} global=yes
       sudo: yes
       with_items:
       - {name: gulp, version: 3.9.0}
-      - {name: react-tools, version: 0.13.3}
       tags:
       - writing-hub
       - development
