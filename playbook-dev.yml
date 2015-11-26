@@ -15,4 +15,5 @@
     - environment-core
     - environment-clojure
     - environment-selenium
+    - environment-docker
     - ./

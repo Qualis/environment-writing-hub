@@ -13,3 +13,6 @@
 [submodule "environment-redis"]
 	path = environment-redis
 	url = https://github.com/svo/environment-redis
+[submodule "environment-docker"]
+	path = environment-docker
+	url = https://github.com/svo/environment-docker
