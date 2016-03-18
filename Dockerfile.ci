@@ -1,4 +1,4 @@
-FROM shippableimages/ubuntu1404_base:latest
+FROM drydock/u14:prod
 MAINTAINER Sean Van Osselaer <svo@qual.is>
 
 ADD . /provisioning
@@ -9,10 +9,13 @@ ADD remove_doc.sh /usr/local/bin/remove_doc
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
+RUN mv /var/lib/apt/lists /tmp && \
+    mkdir -p /var/lib/apt/lists/partial && \
+    sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
     mkdir -p /var/log/supervisor && \
     mkdir -p /etc/supervisor/conf.d && \
     apt-get update && \
+    sudo apt-get remove nodejs && \
     apt-get install supervisor -y && \
     apt-get install software-properties-common -y && \
     apt-add-repository ppa:ansible/ansible -y && \
